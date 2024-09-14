@@ -14,6 +14,8 @@ router.get('/viewCards/list/:id', cardController.getCardsByListId);
 // Route to update an existing card by card ID
 router.put('/updateCards/:id', cardController.updateCard);
 
+router.put('/updateCardData', cardController.updateCardData);
+
 // Route to delete a card by card ID
 router.delete('/deleteCards/:id', cardController.deleteCard);
 

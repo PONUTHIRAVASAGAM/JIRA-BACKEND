@@ -18,6 +18,26 @@ const createCard = async (req, res) => {
   }
 };
 
+
+const updateCardData = async (req, res) => {
+  console.log("=====Update Card Data Method Calling=====");  
+
+  console.log("Request Data...",req);
+  
+  try {
+    const {card_id, card_name, description  } = req.body;
+    const card = await cardRepository.updateCardData({
+      card_id,
+      card_name,
+      description,
+      updated_date: new Date(),
+    });
+    res.status(201).json(card);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
 // const getCardsByUserId = async (req, res) => {
   // try {
     // const user_id  = req.params.id;
@@ -83,6 +103,7 @@ const deleteCardByListId = async (req, res) => {
 
 module.exports = {
   createCard,
+  updateCardData,
   // getCardsByUserId,
   deleteCardByListId,
   getCardsByListId,

@@ -4,6 +4,28 @@ const createCard = async (cardData) => {
   return await Card.create(cardData);
 };
 
+const updateCardData = async (cardData) => {
+  console.log("=====cardData=====",cardData);
+  try {
+    if (!cardData || !cardData.card_id) {
+      throw new Error("Card data or card ID is missing.");
+    }
+
+    console.log("=====cardData=====", cardData);
+
+    const result = await Card.update(cardData, {
+      where: { id: cardData.card_id }
+    });
+
+    console.log("Update result:", result);
+
+    return result;
+  } catch (error) {
+    console.error("Error updating card:", error);
+    throw error; 
+  }
+};
+
 // const getCardsByUserId = async (user_id) => {
   // console.log("=====userId=====",user_id);  
   // return await Card.findAll({ where: { user_id: user_id } });
@@ -31,6 +53,7 @@ const deleteCardByListId = async (list_id) => {
 
 module.exports = {
   createCard,
+  updateCardData,
   // getCardsByUserId,
   deleteCardByListId,
   getCardsByListId,
